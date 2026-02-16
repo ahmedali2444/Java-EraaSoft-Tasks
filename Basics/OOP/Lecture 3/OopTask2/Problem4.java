@@ -2,7 +2,7 @@ package OopTask2;
 
 class P4{
 
-    P4(int a , int b , int c , int d){
+    P4(long a , long b , long c , long d){
         System.out.println("Difference" + " = " + ((a*b) - (c*d)));
     }
 }
