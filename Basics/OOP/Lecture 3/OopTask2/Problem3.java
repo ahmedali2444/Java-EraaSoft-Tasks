@@ -2,7 +2,7 @@ package OopTask2;
 
 class P3{
 
-    P3(int num1 , int num2){
+    P3(long num1 , long num2){
         System.out.println(num1 + " + " + num2 + " = " + (num1 + num2));
         System.out.println(num1 + " * " + num2 + " = " + (num1 * num2));
         System.out.println(num1 + " - " + num2 + " = " + (num1 - num2));
