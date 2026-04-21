@@ -1,4 +1,4 @@
-package level1;
+package level2;
 
 public class Person {
     private final int id;
@@ -9,16 +9,8 @@ public class Person {
         this.name = name;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
     @Override
     public String toString() {
-        return "Person{id=" + id + ", name='" + name + "'}";
+        return "(" + id + ", " + name + ")";
     }
 }
