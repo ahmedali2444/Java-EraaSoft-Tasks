@@ -37,7 +37,6 @@ public class Main {
         // Converting every valid name to its length.
         List<Integer> nameLengths = names.stream()
                 .filter(name -> name != null)
-                .filter(name -> !name.isEmpty())
                 .map(name -> name.length())
                 .collect(Collectors.toList());
         System.out.println("Name lengths: " + nameLengths);

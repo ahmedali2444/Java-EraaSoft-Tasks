@@ -14,12 +14,12 @@ public class Main {
         // Getting the biggest number in the list.
         int maxNumber = numbers.stream()
                 .max((firstNumber, secondNumber) -> firstNumber.compareTo(secondNumber))
-                .orElseThrow();
+                .orElseThrow(() -> new NoSuchElementException("No maximum number found"));
 
         // Getting the smallest number in the list.
         int minNumber = numbers.stream()
                 .min((firstNumber, secondNumber) -> firstNumber.compareTo(secondNumber))
-                .orElseThrow();
+                .orElseThrow(() -> new NoSuchElementException("No minimum number found"));
         System.out.println("Maximum number: " + maxNumber);
         System.out.println("Minimum number: " + minNumber);
 
