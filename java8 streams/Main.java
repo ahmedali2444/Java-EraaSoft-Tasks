@@ -3,70 +3,6 @@ import java.util.stream.*;
 
 public class Main {
 
-    static class Student {
-        String name;
-        String department;
-        double grade;
-
-        Student(String name, String department, double grade) {
-            this.name = name;
-            this.department = department;
-            this.grade = grade;
-        }
-
-        public String getName() {
-            return name;
-        }
-
-        public String getDepartment() {
-            return department;
-        }
-
-        public double getGrade() {
-            return grade;
-        }
-
-        @Override
-        public String toString() {
-            return name + "(" + department + ", " + grade + ")";
-        }
-    }
-
-    static class Employee {
-        String name;
-        int age;
-        String department;
-        double salary;
-
-        Employee(String name, int age, String department, double salary) {
-            this.name = name;
-            this.age = age;
-            this.department = department;
-            this.salary = salary;
-        }
-
-        public String getName() {
-            return name;
-        }
-
-        public int getAge() {
-            return age;
-        }
-
-        public String getDepartment() {
-            return department;
-        }
-
-        public double getSalary() {
-            return salary;
-        }
-
-        @Override
-        public String toString() {
-            return name + "(" + age + ", " + department + ", " + salary + ")";
-        }
-    }
-
     public static void main(String[] args) {
         // Main integer list used in most stream examples.
         List<Integer> numbers = Arrays.asList(10, 5, 3, 7, 2, 10, 5, 8, 9, 0, -3, 4);
@@ -119,6 +55,7 @@ public class Main {
         // 3. Convert all non-null strings to uppercase.
         List<String> uppercasedNames = names.stream()
                 .filter(Objects::nonNull)
+                .filter(name -> !name.isEmpty())
                 .map(String::toUpperCase)
                 .collect(Collectors.toList());
         System.out.println("3. Uppercase strings: " + uppercasedNames);
@@ -145,11 +82,11 @@ public class Main {
                 .count();
         System.out.println("6. Strings longer than 5 characters: " + stringsLongerThanFive);
 
-        // 7. Find the first number that matches the condition: greater than 7.
-        Optional<Integer> firstNumberGreaterThanSeven = numbers.stream()
-                .filter(number -> number > 7)
+        // 7. Find the first number that matches the condition: divisible by 3.
+        Optional<Integer> firstNumberDivisibleByThree = numbers.stream()
+                .filter(number -> number % 3 == 0)
                 .findFirst();
-        System.out.println("7. First number greater than 7: " + firstNumberGreaterThanSeven.orElse(null));
+        System.out.println("7. First number divisible by 3: " + firstNumberDivisibleByThree.orElse(-1));
 
         // 8. Check if any number is divisible by 5.
         boolean anyDivisibleByFive = numbers.stream()
@@ -158,7 +95,7 @@ public class Main {
 
         // 9. Collect numbers into a Set instead of a List.
         Set<Integer> numbersSet = numbers.stream()
-                .collect(Collectors.toCollection(LinkedHashSet::new));
+                .collect(Collectors.toSet());
         System.out.println("9. Numbers collected into Set: " + numbersSet);
 
         // 10. Skip the first 3 numbers and return the rest.
@@ -185,16 +122,19 @@ public class Main {
         System.out.println("12. Maximum and minimum values: max = " + maxNumber + ", min = " + minNumber);
 
         // 13. Calculate the average from a list of doubles.
-        List<Double> doubleNumbers = Arrays.asList(10.5, 5.0, 3.5, 7.0, 2.0);
-        double average = doubleNumbers.stream()
+        List<Double> doubleNumbers = numbers.stream()
+                .map(Integer::doubleValue)
+                .collect(Collectors.toList());
+        OptionalDouble average = doubleNumbers.stream()
                 .mapToDouble(Double::doubleValue)
-                .average()
-                .orElse(0.0);
-        System.out.println("13. Average of doubles: " + average);
+                .average();
+        System.out.println("13. Average of doubles: " + String.format("%.2f", average.orElse(0.0)));
 
-        // 14. Multiply all integers together using reduce.
-        int multiplication = numbers.stream()
-                .reduce(1, (first, second) -> first * second);
+        // 14. Multiply all non-zero integers together using reduce.
+        long multiplication = numbers.stream()
+                .filter(number -> number != 0)
+                .mapToLong(Integer::longValue)
+                .reduce(1L, (first, second) -> first * second);
         System.out.println("14. Multiplication using reduce: " + multiplication);
 
         // 15. Count how many numbers are positive.
@@ -208,17 +148,14 @@ public class Main {
 
         // 16. Group students by department.
         Map<String, List<Student>> studentsByDepartment = students.stream()
-                .collect(Collectors.groupingBy(
-                        Student::getDepartment,
-                        LinkedHashMap::new,
-                        Collectors.toList()
-                ));
+                .collect(Collectors.groupingBy(Student::getDepartment));
         System.out.println("16. Students by department: " + studentsByDepartment);
 
         // 17. Partition numbers into even and odd groups.
         Map<Boolean, List<Integer>> evenOddPartition = numbers.stream()
                 .collect(Collectors.partitioningBy(number -> number % 2 == 0));
-        System.out.println("17. Numbers partitioned by even/odd: " + evenOddPartition);
+        System.out.println("17. Even numbers: " + evenOddPartition.get(true));
+        System.out.println("17. Odd numbers: " + evenOddPartition.get(false));
 
         // 18. Create a comma-separated string from valid names.
         String commaSeparatedNames = names.stream()
@@ -229,18 +166,13 @@ public class Main {
 
         // 19. Group employees by age and count how many employees are in each age.
         Map<Integer, Long> employeesCountByAge = employees.stream()
-                .collect(Collectors.groupingBy(
-                        Employee::getAge,
-                        LinkedHashMap::new,
-                        Collectors.counting()
-                ));
+                .collect(Collectors.groupingBy(Employee::getAge, Collectors.counting()));
         System.out.println("19. Employees count by age: " + employeesCountByAge);
 
         // 20. Calculate the average salary for each department.
         Map<String, Double> averageSalaryByDepartment = employees.stream()
                 .collect(Collectors.groupingBy(
                         Employee::getDepartment,
-                        LinkedHashMap::new,
                         Collectors.averagingDouble(Employee::getSalary)
                 ));
         System.out.println("20. Average salary by department: " + averageSalaryByDepartment);
@@ -255,20 +187,18 @@ public class Main {
         System.out.println("21. Flattened words: " + flattenedWords);
 
         // 22. Extract all unique characters from the flattened words.
-        List<Character> uniqueCharacters = flattenedWords.stream()
-                .flatMapToInt(String::chars)
-                .mapToObj(characterCode -> (char) characterCode)
-                .distinct()
-                .collect(Collectors.toList());
+        Set<Character> uniqueCharacters = nestedWords.stream()
+                .flatMap(Collection::stream)
+                .flatMap(word -> word.chars().mapToObj(characterCode -> (char) characterCode))
+                .collect(Collectors.toSet());
         System.out.println("22. Unique characters: " + uniqueCharacters);
 
         // 23. Filter Optional values and collect only non-empty values.
         List<Optional<String>> optionalNames = Arrays.asList(
-                Optional.of("Ali"),
+                Optional.of("Hello"),
                 Optional.empty(),
-                Optional.of("Sara"),
-                Optional.empty(),
-                Optional.of("Mona")
+                Optional.of("World"),
+                Optional.empty()
         );
         List<String> nonEmptyOptionalValues = optionalNames.stream()
                 .filter(Optional::isPresent)
@@ -279,6 +209,7 @@ public class Main {
         // 24. Map each non-null string to its length.
         List<Integer> stringLengths = names.stream()
                 .filter(Objects::nonNull)
+                .filter(name -> !name.isEmpty())
                 .map(String::length)
                 .collect(Collectors.toList());
         System.out.println("24. String lengths: " + stringLengths);
@@ -311,10 +242,9 @@ public class Main {
 
         // 28. Find duplicate numbers by tracking which numbers were already seen.
         Set<Integer> seenNumbers = new HashSet<>();
-        List<Integer> duplicateNumbers = numbers.stream()
+        Set<Integer> duplicateNumbers = numbers.stream()
                 .filter(number -> !seenNumbers.add(number))
-                .distinct()
-                .collect(Collectors.toList());
+                .collect(Collectors.toSet());
         System.out.println("28. Duplicate numbers: " + duplicateNumbers);
 
         // 29. Remove null and empty strings from the names list.
@@ -324,9 +254,10 @@ public class Main {
                 .collect(Collectors.toList());
         System.out.println("29. Names without null or empty strings: " + namesWithoutNullOrEmpty);
 
-        // 30. Partition students into pass/fail groups based on grade.
+        // 30. Partition students into pass/fail groups based on grade 60.
         Map<Boolean, List<Student>> studentsPassFail = students.stream()
-                .collect(Collectors.partitioningBy(student -> student.getGrade() >= 50));
-        System.out.println("30. Students partitioned into pass/fail: " + studentsPassFail);
+                .collect(Collectors.partitioningBy(student -> student.getGrade() >= 60));
+        System.out.println("30. Pass students: " + studentsPassFail.get(true));
+        System.out.println("30. Fail students: " + studentsPassFail.get(false));
     }
 }
