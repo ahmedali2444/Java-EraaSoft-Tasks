@@ -1,0 +1,140 @@
+@media (min-width: 901px) {
+    .overview-body {
+        overflow: hidden;
+    }
+
+    .overview-body .overview-page {
+        height: 100vh;
+        padding: 28px 0 26px;
+        display: grid;
+        grid-template-rows: auto auto auto auto;
+        align-content: start;
+        row-gap: 20px;
+        box-sizing: border-box;
+    }
+
+    .overview-body .overview-topbar {
+        min-height: 52px;
+    }
+
+    .overview-body .overview-hero {
+        margin: 30px 0 6px;
+    }
+
+    .overview-body .overview-hero h1 {
+        font-size: clamp(42px, 4.2vw, 58px);
+        line-height: 1;
+    }
+
+    .overview-body .overview-hero > p:last-child {
+        margin-top: 12px;
+    }
+
+    .overview-body .overview-grid {
+        gap: 16px;
+    }
+
+    .overview-body .balance-card,
+    .overview-body .quick-card {
+        min-height: 158px;
+        padding: 22px 24px;
+    }
+
+    .overview-body .balance-card strong {
+        margin: 10px 0;
+        font-size: 38px;
+        line-height: 1;
+    }
+
+    .overview-body .action-shortcuts {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        margin-top: 0;
+        gap: 18px;
+        min-height: 0;
+        align-items: stretch;
+    }
+
+    .overview-body .action-shortcut {
+        min-height: 136px;
+        height: auto;
+        box-sizing: border-box;
+        display: grid;
+        grid-template-columns: 38px minmax(0, 1fr) auto;
+        grid-template-rows: auto auto;
+        column-gap: 13px;
+        row-gap: 5px;
+        align-items: center;
+        align-content: center;
+        padding: 18px 20px;
+    }
+
+    .overview-body .shortcut-icon {
+        grid-row: 1 / 3;
+        margin: 0;
+    }
+
+    .overview-body .action-shortcut strong {
+        grid-column: 2;
+        grid-row: 1;
+        line-height: 1.25;
+    }
+
+    .overview-body .action-shortcut small {
+        grid-column: 2;
+        grid-row: 2;
+        margin: 0;
+        line-height: 1.38;
+    }
+
+    .overview-body .action-shortcut b {
+        grid-column: 3;
+        grid-row: 1 / 3;
+        margin: 0;
+        padding-top: 0;
+        white-space: nowrap;
+    }
+}
+
+@media (min-width: 901px) and (max-width: 1160px) {
+    .overview-body .action-shortcuts {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (min-width: 901px) and (max-height: 780px) {
+    .overview-body .overview-page {
+        padding-top: 18px;
+        padding-bottom: 18px;
+        row-gap: 14px;
+    }
+
+    .overview-body .overview-hero {
+        margin-top: 14px;
+        margin-bottom: 0;
+    }
+
+    .overview-body .overview-hero h1 {
+        font-size: 42px;
+    }
+
+    .overview-body .overview-hero > p:last-child {
+        font-size: 16px;
+    }
+
+    .overview-body .balance-card,
+    .overview-body .quick-card {
+        min-height: 136px;
+        padding: 18px 20px;
+    }
+
+    .overview-body .action-shortcut {
+        min-height: 118px;
+        padding: 15px 18px;
+    }
+
+    .overview-body .shortcut-icon {
+        width: 34px;
+        height: 34px;
+        margin-bottom: 12px;
+    }
+}

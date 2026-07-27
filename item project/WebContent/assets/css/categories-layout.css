@@ -1,0 +1,23 @@
+.table-card{
+    width:min(1080px,100%);
+}
+
+table{
+    table-layout:fixed;
+    min-width:0;
+}
+
+th:first-child,
+td:first-child{
+    width:18%;
+}
+
+th:nth-child(2),
+td:nth-child(2){
+    width:52%;
+}
+
+th:last-child,
+td:last-child{
+    width:30%;
+}

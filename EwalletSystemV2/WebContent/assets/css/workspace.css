@@ -1,0 +1,275 @@
+.side-panel {
+    gap: 22px;
+}
+
+.side-nav {
+    gap: 5px;
+}
+
+.side-link {
+    min-height: 39px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 9px 11px;
+    font-size: 14px;
+}
+
+.side-link::before {
+    display: none;
+}
+
+.side-link .nav-icon {
+    width: 22px;
+    height: 22px;
+    display: grid;
+    place-items: center;
+    flex: 0 0 auto;
+    border-radius: 7px;
+    background: rgba(139, 148, 158, 0.1);
+    color: inherit;
+}
+
+.side-link .nav-icon .nav-icon,
+.side-link .nav-icon .ui-icon {
+    width: 14px;
+    height: 14px;
+}
+
+.side-link.active .nav-icon,
+.side-link:hover .nav-icon {
+    background: rgba(63, 185, 80, 0.2);
+    color: var(--green-bright);
+}
+
+.side-panel .signout {
+    min-height: 42px;
+    padding: 10px 13px;
+    border: 1px solid rgba(248, 81, 73, 0.65);
+    border-radius: 10px;
+    background: rgba(248, 81, 73, 0.1);
+    color: #ff9b95;
+    font-weight: 650;
+    transition: background .18s ease, border-color .18s ease, color .18s ease;
+}
+
+.side-panel .signout::before {
+    display: none;
+}
+
+.side-panel .signout .nav-icon {
+    background: rgba(248, 81, 73, 0.12);
+    color: #ff9b95;
+}
+
+.side-panel .signout:hover {
+    border-color: #ff7b72;
+    background: rgba(248, 81, 73, 0.2);
+    color: #ffe1de;
+}
+
+@media (min-width: 901px) {
+    .workspace {
+        align-items: start;
+    }
+
+    .workspace-content {
+        padding-top: 16px;
+        padding-bottom: 40px;
+    }
+
+    .side-panel {
+        position: sticky;
+        top: 0;
+        align-self: start;
+        height: 100vh;
+        min-height: 0;
+        box-sizing: border-box;
+        overflow: hidden;
+    }
+
+    .side-panel .signout {
+        width: auto;
+        align-self: flex-end;
+        margin-left: auto;
+        justify-content: flex-end;
+        text-align: right;
+    }
+}
+
+.cards-dashboard {
+    grid-template-columns: minmax(320px, 0.9fr) minmax(0, 1.1fr);
+    gap: 24px;
+    align-items: start;
+}
+
+.add-card-panel {
+    padding: 30px;
+    border-radius: 18px;
+}
+
+.form-heading {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 24px;
+}
+
+.form-heading h2 {
+    margin: 0;
+}
+
+.form-heading p {
+    margin: 5px 0 0;
+    color: var(--muted);
+    font-size: 13px;
+}
+
+.form-heading-icon {
+    width: 42px;
+    height: 42px;
+    display: grid;
+    place-items: center;
+    flex: 0 0 auto;
+    border-radius: 12px;
+    background: var(--green-soft);
+    color: var(--green-bright);
+}
+
+.form-heading-icon .ui-icon {
+    width: 20px;
+    height: 20px;
+}
+
+.add-card-panel .form-stack {
+    gap: 15px;
+}
+
+.add-card-panel .field {
+    gap: 6px;
+}
+
+.add-card-panel .field label {
+    font-size: 13px;
+}
+
+.add-card-panel .field input {
+    min-height: 48px;
+    padding: 11px 13px;
+}
+
+.add-card-panel .form-row {
+    gap: 12px;
+}
+
+.add-card-panel .card-meta-row {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.full-button {
+    width: 100%;
+    margin-top: 2px;
+}
+
+.cards-list-panel {
+    padding: 0;
+}
+
+.cards-list-panel .empty-state {
+    min-height: 220px;
+    display: grid;
+    place-items: center;
+    padding: 28px;
+    text-align: center;
+}
+
+.history-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    margin-bottom: 18px;
+}
+
+.history-toolbar > span {
+    color: var(--muted);
+    font-size: 13px;
+}
+
+.history-filter {
+    display: inline-flex;
+    gap: 3px;
+    padding: 4px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    background: #0d1117;
+}
+
+.history-filter-button {
+    min-height: 32px;
+    padding: 6px 10px;
+    border: 0;
+    border-radius: 7px;
+    background: transparent;
+    color: var(--muted);
+    font: inherit;
+    font-size: 12px;
+    font-weight: 650;
+}
+
+.history-filter-button:hover {
+    background: rgba(63, 185, 80, 0.1);
+    color: var(--text);
+    transform: none;
+}
+
+.history-filter-button.active {
+    background: var(--green-soft);
+    color: var(--green-bright);
+}
+
+.history-filter-empty {
+    margin: 0;
+    padding: 28px 0 8px;
+    color: var(--muted);
+    text-align: center;
+}
+
+/* Keep filtered transactions out of the layout regardless of other list styles. */
+[data-history-category][hidden] {
+    display: none !important;
+}
+
+@media (max-width: 900px) {
+    .side-link {
+        justify-content: center;
+    }
+
+    .side-link .nav-icon {
+        display: none;
+    }
+
+    .cards-dashboard {
+        grid-template-columns: 1fr;
+    }
+
+    .history-toolbar {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 560px) {
+    .add-card-panel {
+        padding: 22px;
+    }
+
+    .history-filter {
+        width: 100%;
+    }
+
+    .history-filter-button {
+        flex: 1;
+        padding-inline: 6px;
+    }
+}

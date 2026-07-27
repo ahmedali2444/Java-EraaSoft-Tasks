@@ -1,0 +1,32 @@
+.auth-body{
+    height:100vh;
+    min-height:0;
+    padding:16px;
+    overflow:hidden;
+}
+
+.auth-layout{
+    min-height:calc(100vh - 32px);
+    overflow:hidden;
+    border:1px solid rgba(216,232,236,.12);
+    border-radius:20px;
+}
+
+.auth-visual{
+    min-height:calc(100vh - 32px);
+}
+
+@media(max-width:560px){
+    .auth-body{
+        padding:8px;
+    }
+
+    .auth-layout{
+        min-height:calc(100vh - 16px);
+        border-radius:14px;
+    }
+
+    .auth-visual{
+        min-height:calc(100vh - 16px);
+    }
+}
