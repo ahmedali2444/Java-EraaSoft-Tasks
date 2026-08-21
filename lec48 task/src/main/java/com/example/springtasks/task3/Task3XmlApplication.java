@@ -13,7 +13,6 @@ public class Task3XmlApplication {
             firstPerson.save("Sara");
             secondPerson.save("Youssef");
 
-            // Spring does not destroy prototype beans automatically.
             firstPerson.destroy();
             secondPerson.destroy();
         }
